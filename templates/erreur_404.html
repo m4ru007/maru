@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Page non trouvée - League Zone{% endblock %}
+
+{% block content %}
+<body id="error404">
+  <main class="error-page">
+    <div class="container error-container">
+      <h1 id="animated404" class="error-code"></h1>
+      <p class="error-message">
+        Oups ! La page que vous cherchez n'existe pas ou a été déplacée.
+      </p>
+      <a href="{{ url_for('index') }}" id="backHomeBtn" class="btn-primary" style="display:none;">
+        Retour à l'accueil
+      </a>
+    </div>
+  </main>
+</body>
+{% endblock %}

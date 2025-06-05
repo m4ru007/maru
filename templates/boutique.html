@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique League of Legends</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <h1 class="title">Boutique League of Legends</h1>
+    </header>
+
+    <!-- Affichage du solde RP et Blue Essence -->
+    <div class="user-balance">
+        <p>RP : <strong>{{ rp }}</strong></p>
+        <p>Blue Essence : <strong>{{ blue_essence }}</strong></p>
+    </div>
+
+    <!-- Affichage des produits par catégorie -->
+    {% for categorie, produits in categories.items() %}
+        <section class="category">
+            <h2>{{ categorie }}</h2>
+            <div class="shop-container">
+                {% for produit in produits %}
+                    <div class="item">
+                        <a href="{{ url_for('produit_detail', produit_id=produit['_id']|string) }}">
+                            <img src="{{ produit.image_url }}" alt="{{ produit.nom }}">
+                            <h2>{{ produit.nom }}</h2>
+                            <p>Prix : {{ produit.prix }} points</p>
+                        </a>
+                        <form method="POST" action="{{ url_for('acheter_produit', produit_id=produit['_id']|string) }}">
+                            <button class="buy-button">Acheter</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% endfor %}
+
+    <div>
+        <a href="/" class="back-button">Retour à l'accueil</a>
+    </div>
+
+    <script src="{{ url_for('static', filename='shop.js') }}"></script>
+</body>
+</html>

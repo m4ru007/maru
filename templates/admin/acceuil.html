@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil Admin - League of Legends{% endblock %}
+
+{% block content %}
+<main class="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+    <div class="container mx-auto px-4 py-8"> 
+        <!-- Hero Section -->
+        <section class="relative text-center py-20 mb-16">
+            <div class="absolute inset-0 bg-[url('/static/images/lol-bg.jpg')] bg-cover bg-center opacity-20"></div>
+            <div class="relative z-10">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-6">
+                    Tableau de bord Administrateur
+                </h1>
+                <p class="mt-4 text-gray-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                    Gérez les utilisateurs, les ressources et la boutique de League of Legends.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section Utilisateurs -->
+        <section id="utilisateurs" class="mb-16">
+            <h2 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-8">
+                <i class="fas fa-users mr-2"></i>Gestion des Utilisateurs
+            </h2>
+            <div class="text-center p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700">
+                <span class="text-gray-300 text-lg">Liste des utilisateurs inscrits :</span>
+                <br>
+                <ul class="mt-4">
+                    {% for utilisateur in utilisateurs %}
+                    <li class="text-lg text-gray-300">{{ utilisateur.nom }} - RP: {{ utilisateur.rp }} - Blue Essence: {{ utilisateur.blue_essence }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section Boutique -->
+        <section id="boutique" class="mb-16">
+            <h2 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-8">
+                <i class="fas fa-store mr-2"></i>Gestion de la Boutique
+            </h2>
+            <div class="text-center mb-8 p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700">
+                <span class="text-gray-300 text-lg">Produits en boutique :</span>
+                <br>
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    {% for produit in produits %}
+                    <div class="p-4 bg-gray-700 rounded-lg">
+                        <h3 class="text-xl text-teal-400">{{ produit.nom }}</h3>
+                        <p class="text-gray-300">{{ produit.description }}</p>
+                        <span class="text-gray-300">Prix: {{ produit.prix }} RP</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Annonces -->
+        <section id="annonces" class="mb-16">
+            <h2 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-8">
+                <i class="fas fa-bullhorn mr-2"></i>Gestion des Annonces
+            </h2>
+            <div class="text-center mb-8 p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700">
+                <span class="text-gray-300 text-lg">Dernières Annonces :</span>
+                <br>
+                <ul class="mt-4">
+                    {% for annonce in annonces %}
+                    <li class="text-lg text-gray-300">{{ annonce.titre }} - {{ annonce.date }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}

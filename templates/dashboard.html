@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="page-container">
+    <h1 class="text-center text-2xl font-bold mb-6">Bienvenue sur votre tableau de bord, {{ session['util'] }}!</h1>
+    
+    <div class="text-center mb-4">
+        <p class="text-lg">Voici un aperçu de votre compte :</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="font-bold text-xl">Statistiques de votre compte</h2>
+            <p>RP : <strong>1 000 000</strong></p>
+            <p>Blue Essence : <strong>1 000 000</strong></p>
+            <p>Nombre d'annonces créées : <strong>5</strong></p>
+            <p>Nombre de messages reçus : <strong>12</strong></p>
+            <p>Dernière connexion : <strong>{{ session.get('derniere_connexion', 'Non disponible') }}</strong></p>
+        </div>
+
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="font-bold text-xl">Actions rapides</h2>
+            <ul>
+                <li><a href="{{ url_for('boutique') }}" class="text-teal-600 hover:underline">Accéder à la boutique</a></li>
+                <li><a href="{{ url_for('index') }}" class="text-teal-600 hover:underline">Voir toutes les annonces</a></li>
+                <li><a href="{{ url_for('logout') }}" class="text-teal-600 hover:underline">Se déconnecter</a></li>
+                <li><a href="#" class="text-teal-600 hover:underline">Modifier votre profil</a></li>
+            </ul>
+        </div>
+
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="font-bold text-xl">Dernières annonces</h2>
+            <ul>
+                {% for annonce in annonces %}
+                    <li><strong>{{ annonce.titre }}</strong> - {{ annonce.description }}</li>
+                {% endfor %} 
+            </ul>
+        </div>
+    </div>
+
+    <div class="text-center mt-6"> 
+    </div>
+</div>
+{% endblock %}

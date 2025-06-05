@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Boutique - League of Legends{% endblock %}
+
+{% block content %}
+<main class="min-h-screen bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Titre de la boutique -->
+        <h1 class="text-4xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 mb-10">
+            Boutique Nexus
+        </h1>
+
+        <!-- Section monnaie virtuelle -->
+        <section class="text-center mb-8 p-4 bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-700">
+            <h2 class="text-2xl font-bold text-yellow-400 mb-4">Votre monnaie virtuelle :</h2>
+            <p class="text-lg text-gray-300">Accumulez des Nexus Points en jouant et en participant aux événements !</p>
+            <span class="text-2xl font-bold text-teal-400">
+                <i class="fas fa-coins mr-2"></i>Nexus Points: <span id="np_amount">{{ nexus_points }}</span>
+            </span>
+        </section>
+
+        <!-- Section Objets à acheter -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-yellow-400 mb-6">Boutique d'icônes et récompenses</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Exemple d'article -->
+                <div class="p-4 bg-gray-800 rounded-lg shadow-md text-center">
+                    <img src="/static/images/icon1.png" alt="Icône de champion" class="mx-auto mb-4 w-20 h-20">
+                    <h3 class="text-lg font-bold text-white">Icône Yasuo</h3>
+                    <p class="text-gray-400">Personnalisez votre profil avec cette icône exclusive.</p>
+                    <span class="block mt-2 text-yellow-400 font-bold">Prix : 500 NP</span>
+                    <button class="mt-3 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg">Acheter</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Tournois -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-yellow-400 mb-6">Tournois et événements</h2>
+            <p class="text-gray-300">Participez à nos tournois pour remporter des Nexus Points et des récompenses exclusives !</p>
+            <button class="mt-4 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-bold rounded-lg">Voir les tournois</button>
+        </section>
+    </div>
+</main>
+{% endblock %}

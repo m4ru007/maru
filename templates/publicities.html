@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Regarde une pub pour gagner des points</h2>
+<video width="320" height="240" controls>
+    <source src="{{ url_for('static', filename='pub.mp4') }}" type="video/mp4">
+    Ton navigateur ne supporte pas la vidéo.
+</video>
+<form action="{{ url_for('regarder_pub') }}" method="POST">
+    <button type="submit">J'ai regardé la pub</button>
+</form>
+{% endblock %}

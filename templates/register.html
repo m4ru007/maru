@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block content %}
+<div class="flex justify-center items-center min-h-screen bg-gradient-to-b from-gray-800 to-gray-900">
+    <div class="bg-white/10 backdrop-blur-md shadow-xl rounded-xl p-8 w-full max-w-md border border-gray-700">
+        <h1 class="text-center text-3xl font-bold text-white mb-8">Créer un compte</h1>
+
+        {% if erreur %}
+        <div class="bg-red-500/90 text-white p-4 rounded-lg mb-6 text-center animate-pulse backdrop-blur">
+            <i class="fas fa-exclamation-triangle mr-2"></i>{{ erreur }}
+        </div>
+        {% endif %}
+
+        <form action="{{ url_for('register') }}" method="POST" class="space-y-6">
+            <!-- Nom d'utilisateur -->
+            <div class="space-y-2">
+                <label for="utilisateur" class="block text-sm font-medium text-gray-200">Nom d'utilisateur</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                        <i class="fas fa-user text-gray-400"></i>
+                    </span>
+                    <input type="text" name="utilisateur" id="utilisateur" required 
+                           class="w-full bg-gray-800/50 border border-gray-600 text-white rounded-lg pl-10 p-3 
+                                  focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all
+                                  placeholder-gray-400" 
+                           placeholder="Choisissez un pseudo"
+                           autocomplete="username">
+                </div>
+            </div>
+
+            <!-- Mot de passe -->
+            <div class="space-y-2">
+                <label for="motdepasse" class="block text-sm font-medium text-gray-200">Mot de passe</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                        <i class="fas fa-lock text-gray-400"></i>
+                    </span>
+                    <input type="password" name="motdepasse" id="motdepasse" required 
+                           class="w-full bg-gray-800/50 border border-gray-600 text-white rounded-lg pl-10 p-3
+                                  focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all
+                                  placeholder-gray-400" 
+                           placeholder="Créez un mot de passe"
+                           autocomplete="new-password">
+                    <button type="button" onclick="togglePassword('motdepasse', 'toggleIcon1')" 
+                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-200 transition-colors">
+                        <i class="fas fa-eye" id="toggleIcon1"></i>
+                    </button>
+                </div>
+                <p class="text-sm text-gray-400 mt-1">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    Le mot de passe doit contenir au moins 8 caractères
+                </p>
+            </div>
+
+            <!-- Confirmation mot de passe -->
+            <div class="space-y-2">
+                <label for="confirmation" class="block text-sm font-medium text-gray-200">Confirmez le mot de passe</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                        <i class="fas fa-lock text-gray-400"></i>
+                    </span>
+                    <input type="password" name="confirmation" id="confirmation" required 
+                           class="w-full bg-gray-800/50 border border-gray-600 text-white rounded-lg pl-10 p-3
+                                  focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all
+                                  placeholder-gray-400" 
+                           placeholder="Répétez votre mot de passe"
+                           autocomplete="new-password">
+                    <button type="button" onclick="togglePassword('confirmation', 'toggleIcon2')" 
+                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-200 transition-colors">
+                        <i class="fas fa-eye" id="toggleIcon2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" 
+                    class="w-full bg-gradient-to-r from-teal-600 to-teal-400 text-white font-medium py-3 px-4 rounded-lg
+                           hover:from-teal-500 hover:to-teal-300 transform hover:-translate-y-0.5 transition-all duration-200
+                           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                <i class="fas fa-user-plus mr-2"></i>S'inscrire
+            </button>
+        </form>
+
+        <div class="mt-6 text-center text-gray-400">
+            <p>Déjà un compte ? 
+                <a href="{{ url_for('login') }}" 
+                   class="text-teal-400 hover:text-teal-300 transition-colors">
+                    Connectez-vous ici
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

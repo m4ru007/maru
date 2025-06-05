@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ produit.nom if produit else 'Produit inconnu' }} - Boutique League of Legends</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <h1>{{ produit.nom if produit else 'Produit inconnu' }}</h1>
+        <div class="balance-display">
+            <p>Solde actuel: {{ session.get('util', 0) }} points</p>
+        </div>
+    </header>
+    
+    <section class="product-detail">
+        <div class="product-info">
+            {% if produit %}
+                <img src="{{ produit.image_url }}" alt="{{ produit.nom }}" class="product-image">
+                <div class="product-description">
+                    <h2>Description</h2>
+                    <p>{{ produit.description }}</p>
+                    <p><strong>Prix : </strong>{{ produit.prix }} points</p>
+                    
+                    <!-- Formulaire d'achat -->
+                    <form method="POST" action="{{ url_for('acheter_produit', produit_id=produit['_id']) }}">
+                        <button type="submit" class="buy-button">Acheter</button>
+                    </form>
+                </div>
+            {% else %}
+                <p>Produit introuvable.</p>
+            {% endif %}
+        </div>
+        <div>
+            <a href="{{ url_for('boutique') }}" class="back-button">Retour à la boutique</a>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='shop.js') }}"></script>
+</body>
+</html>

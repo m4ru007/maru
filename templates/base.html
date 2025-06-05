@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{% block title %}Mon Application{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body class="bg-gray-100">
+    <!-- En-tête -->
+    <header class="bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-800 text-white py-6 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-4xl font-bold">League Zone</h1>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="{{ url_for('index') }}" class="hover:underline">Accueil</a></li>
+                    <li><a href="#actualites" class="hover:underline">Actualités</a></li>
+                    <li><a href="#nouveautes" class="hover:underline">Nouveautés</a></li>
+                    <li><a href="#contact" class="hover:underline">Contact</a></li>
+                    <li><a href="{{ url_for('boutique') }}" class="hover:underline">Boutique</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+   
+    {% block content %}
+    {% endblock %}
+   
+    <footer id="contact" class="bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-800 text-white py-6 shadow-inner">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Mon Beau Site. Tous droits réservés.</p>
+            <p class="mt-2">Contactez-nous à : <a href="mailto:contact@monsite.com" class="underline">contact@monsite.com</a></p>
+        </div>
+    </footer>
+
+    <!-- Script pour récupérer les valeurs dynamiquement -->
+    <script>
+        async function updateCurrency() {
+            try {
+                let response = await fetch("{{ url_for('get_currency') }}");
+                let data = await response.json();
+                document.getElementById("rp_amount").textContent = data.rp;
+                document.getElementById("be_amount").textContent = data.be;
+            } catch (error) {
+                console.error("Erreur de mise à jour des devises:", error);
+            }
+        }
+
+        // Met à jour toutes les 5 secondes
+        setInterval(updateCurrency, 5000);
+        window.onload = updateCurrency;
+    </script>
+</body>
+</html>

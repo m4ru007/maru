@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Quêtes{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-6">
+    <h1 class="text-3xl font-bold text-center mb-6">📜 Quêtes disponibles</h1>
+
+    {% if message %}
+        <div class="bg-green-500 text-white p-3 rounded mb-4">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for quete in quetes %}
+        <div class="bg-white p-4 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold">{{ quete.nom }}</h2>
+            <p class="text-gray-700">Récompense : <span class="font-bold">{{ quete.points }} points</span></p>
+            
+            {% if quete.active %}
+                <form action="{{ url_for('valider_quete', quete_id=quete._id) }}" method="POST">
+                    <button type="submit" class="mt-3 bg-teal-600 text-white py-2 px-4 rounded hover:bg-teal-700 transition">Valider la quête</button>
+                </form>
+            {% else %}
+                <p class="text-gray-500 mt-3">✅ Déjà complétée</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mt-6">
+        <a href="{{ url_for('dashboard') }}" class="text-teal-600 hover:underline">⬅ Retour au tableau de bord</a>
+    </div>
+</div>
+{% endblock %}

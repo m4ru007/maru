@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin - Tableau de Bord{% endblock %}
+
+{% block content %}
+<main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-6 text-yellow-400">Tableau de bord Administrateur</h1>
+
+    <!-- Section Gestion Utilisateurs -->
+    <section class="mb-8">
+        <h2 class="text-2xl font-semibold text-yellow-400">Utilisateurs</h2>
+        <ul>
+            {% for utilisateur in utilisateurs %}
+            <li class="border-b py-2 flex justify-between">
+                <span>{{ utilisateur.nom }} - Rôle: {{ utilisateur.role }}</span>
+                <a href="{{ url_for('supprimer_utilisateur', utilisateur_id=utilisateur._id) }}" 
+                   class="text-red-500">Supprimer</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <!-- Section Gestion Boutique -->
+    <section class="mb-8">
+        <h2 class="text-2xl font-semibold text-yellow-400">Produits</h2>
+        <ul>
+            {% for produit in produits %}
+            <li class="border-b py-2">{{ produit.nom }} - {{ produit.prix }} RP</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <!-- Section Gestion Annonces -->
+    <section>
+        <h2 class="text-2xl font-semibold text-yellow-400">Annonces</h2>
+        <ul>
+            {% for annonce in annonces %}
+            <li class="border-b py-2">{{ annonce.titre }} - {{ annonce.date }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+</main>
+{% endblock %}
